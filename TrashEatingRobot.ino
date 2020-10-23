@@ -16,12 +16,6 @@ void setup() {
 
   // pin A7 is for the distance sensor
   pinMode(A7, INPUT);
-
-  // these 3 pins (pin0, pin1, pin13) are for turning on LEDs
-  // Arduino nano already has 3 LEDs on these pins.
-  pinMode(13, OUTPUT);
-  pinMode(0, OUTPUT);
-  pinMode(1, OUTPUT);
 }
 
 // in order to check coming hand,
@@ -60,14 +54,7 @@ void loop() {
 
 
 void action() {
-  // call this function for turning on three LEDs all together
-  led(true);
-
-  // eating sequence
-  // wait 1000ms (1 second)
-  delay(1000);
-
-  // let's use pin12 for motor control
+// let's use pin12 for motor control
   armServo.attach(12);
   // let's move the motor to degree '10' (move the arm up)
   armServo.write(10);
@@ -100,22 +87,5 @@ void action() {
 
   // release arm's torque
   armServo.detach();
-
-  // call this function for turning off three LEDs all together
-  led(false);
-}
-
-void led(bool onOff) {
-  // pin 13's LED turns on when it is high
-  // pin 0, 1's LED turn on when it is low
-  if (onOff) {
-    digitalWrite(13, HIGH);
-    digitalWrite(0, LOW);
-    digitalWrite(1, LOW);
-  } else {
-    digitalWrite(13, LOW);
-    digitalWrite(0, HIGH);
-    digitalWrite(1, HIGH);
-  }
 }
 
