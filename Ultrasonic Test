@@ -1,0 +1,34 @@
+#define trigpin 6   // trigger pin is connected in pin number 6
+#define echopin 7   // trigger pin is connected in pin number 5
+#include <Servo.h>
+Servo servo;
+void setup()    
+ {
+  Serial.begin(9600);
+   pinMode(trigpin,OUTPUT);   //trigger is defined as OUTPUT
+   pinMode(echopin,INPUT);    //echo is defined as INPUT
+   servo.attach(9);
+   
+}
+void loop() 
+{
+  int duration, distance;     //Declaration of variable
+  digitalWrite(trigpin,HIGH);
+  delay(100);
+  digitalWrite(trigpin, LOW);
+  
+  duration=pulseIn(echopin,HIGH);
+  distance=(duration/2)/29.1;
+  
+if(distance > 0 && distance <= 20){ //Red led turns on
+        servo.write(90);
+    }
+
+  else if(distance <= 20){
+servo.write(0);
+    }
+      
+Serial.print("cm");
+Serial.println(distance);
+delay(100);
+}
